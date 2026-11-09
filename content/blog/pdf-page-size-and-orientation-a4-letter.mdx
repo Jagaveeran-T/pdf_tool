@@ -1,0 +1,131 @@
+---
+title: "A4 vs Letter: PDF Page Size, Orientation and Margins"
+description: "A4 and US Letter compared in mm, inches and points, plus orientation, margins, printing scale problems and how Image to PDF handles each option."
+date: "2026-11-08"
+category: "Explainers"
+---
+
+Open any PDF and the first thing your printer cares about is the page size. Most of the time you never think about it, until a document prints with its edges cut off, a scan swims in a sea of white, or a colleague in another country says your file "looks weird". This article explains the two page sizes you will meet most often, A4 and US Letter, how orientation and margins interact with them, and what the page-size options in the [Image to PDF](/image-to-pdf/) tool actually do.
+
+## The two sizes in real numbers
+
+A4 and US Letter are close enough that people assume they are interchangeable. They are not, and the difference matters when you print.
+
+| Property | A4 | US Letter |
+| --- | --- | --- |
+| Millimetres | 210 x 297 mm | 215.9 x 279.4 mm |
+| Inches | 8.27 x 11.69 in | 8.5 x 11 in |
+| PDF points (1 pt = 1/72 in) | about 595 x 842 pt | 612 x 792 pt |
+| Aspect ratio (long side / short side) | about 1.414 | about 1.294 |
+| Shape | Slightly narrower and taller | Slightly wider and shorter |
+
+Two things stand out. Letter is about 6 mm wider than A4, and A4 is about 18 mm taller. If you place an A4 page on top of a Letter page, A4 sticks out at the top and bottom, while Letter sticks out at the sides.
+
+The point values are worth knowing because PDF files measure everything in points. A PDF does not store "A4" as a label; it stores a rectangle of roughly 595 by 842 units. Viewers recognise that rectangle and show "A4" in the document properties.
+
+## Who uses which
+
+A4 is part of the ISO 216 family of sizes, used as the standard office paper size across most of the world, including Europe, most of Asia, Africa, Oceania and much of South America. US Letter is the everyday standard in the United States and Canada, and it is also common in Mexico and some Central American and Caribbean countries. Details vary by country and by organisation, so if you are sending something to an official body, check what they ask for rather than assuming.
+
+A few practical consequences:
+
+- A form you download from a government site in London is almost certainly A4. The same kind of form from a US state agency is almost certainly Letter.
+- Paper in your home printer tray matches your region. Printing an A4 PDF onto Letter paper (or the reverse) is where most scaling trouble begins.
+- Legal paper, ledger and A3 exist too, but they are specialist sizes. The tools on this site offer A4, US Letter and "fit to image", so this article sticks to those.
+
+## Orientation: portrait, landscape and "auto"
+
+Orientation is simply which edge is the long one. Portrait means taller than wide; landscape means wider than tall. An A4 page in landscape is 297 x 210 mm; it is the same sheet of paper turned sideways.
+
+Orientation matters because photos and documents have shapes. A phone photo of a contract is usually portrait. A screenshot of a spreadsheet or a slide is usually landscape. Putting a landscape image on a portrait page wastes most of the page: the image shrinks to fit the width and leaves large blank bands above and below.
+
+The Image to PDF tool offers three orientation choices:
+
+- **Auto (by image shape):** each page takes the orientation that suits its image. A landscape picture gets a landscape page, a portrait picture gets a portrait page. This is the sensible default for mixed batches.
+- **Portrait:** every page is portrait, whatever the image shape.
+- **Landscape:** every page is landscape.
+
+Use portrait or landscape explicitly when you want every page to look the same, for example a set of slides that should all be landscape. Use auto when your pile is mixed, such as a few portrait receipts and a landscape chart.
+
+## Fit to image: no page-size decision at all
+
+"Fit to image" is the third page-size option. Instead of forcing a standard sheet, each page is made to match the shape of its own image, so there are no empty bands and nothing is shrunk to squeeze onto A4 or Letter. Orientation is effectively decided by the image.
+
+This is a good choice when:
+
+- the PDF will mainly be read on a screen, not printed;
+- your images are unusual shapes, such as tall receipts, wide panoramas or square graphics;
+- you do not want any white borders around a photo.
+
+It is a poor choice when you plan to print on standard paper. Pages of differing sizes will print at differing scales, and a stack of mixed-size pages can look untidy in a viewer that shows them side by side. If printing is the goal, choose A4 or Letter to match your paper.
+
+## How images sit on the page
+
+When you choose A4 or US Letter, the tool scales each image to fit inside the page and centres it. It never crops. That means an image with a different shape from the page will show white space on two sides. A 4:3 landscape photo on a portrait A4 page, for instance, fills the width and leaves white above and below.
+
+Two details are worth knowing:
+
+- PNG images with transparency keep that transparency, and the page behind them is white.
+- Images are placed at the size the page allows, not at some fixed print resolution. A small, low-resolution image stretched to fill an A4 page will look soft in print. If an image is only a few hundred pixels wide, expect it to look blurry on paper.
+
+For a deeper look at the formats you feed in, see [JPG vs PNG for PDF](/blog/jpg-vs-png-for-pdf/).
+
+## Margins: none, small or medium
+
+Margins are the empty frame between the image and the edge of the page. The tool offers three levels: none, small and medium.
+
+- **None:** the image can touch the page edges. This is right for fit-to-image PDFs on screen and for photos that should fill the page. For printing, be aware that many home printers cannot print right to the paper edge; they leave an unprintable strip of a few millimetres, and anything there may be clipped.
+- **Small:** a thin white frame. A sensible all-round choice for documents you might print.
+- **Medium:** a more generous frame. Good for photos you want to look presentable, or for pages that will be punched, stapled or hole-bound.
+
+Margins reduce the area available to the image, so the image becomes a little smaller as the margin grows. On a fit-to-image page the margin is added around the image, so the page itself gets slightly larger rather than the image shrinking.
+
+## Why printing sometimes goes wrong
+
+Most "my PDF printed badly" problems come from the print dialog, not the file. Look at these settings first.
+
+### Scale and "fit to page"
+
+Print dialogs usually offer "Actual size" (or 100%) and "Fit to page" (or "Shrink to printable area"). If you print an A4 PDF on Letter paper at actual size, the extra 18 mm of height falls off the bottom of the sheet. Choosing fit-to-page shrinks everything by roughly 5 to 6 percent so it all lands on the paper. Going the other way, Letter on A4, the width is the limiting side and a similar shrink applies.
+
+### Mismatched paper settings
+
+Some printers report "paper size mismatch" because the PDF says A4 and the tray is set to Letter. Check the paper-size dropdown in the print dialog and the tray setting on the printer.
+
+### Unprintable edges
+
+If a no-margin PDF has its content clipped, it is almost certainly the printer's hardware limit. Recreate the PDF with a small margin.
+
+### Mixed sizes in one document
+
+If you merge PDFs of different page sizes, the result keeps each page at its own size. Printing it with "fit to page" will scale each sheet independently, which can produce pages that look different from each other. When consistency matters, create your source PDFs with the same page size before combining them with the [Merge PDF](/merge-pdf/) tool. The [merge guide](/guides/merge-pdf-guide/) explains how ordering works.
+
+## Choosing quickly
+
+| Situation | Suggested page size | Orientation | Margin |
+| --- | --- | --- | --- |
+| Printing at home in Europe or Asia | A4 | Auto | Small |
+| Printing at home in the US or Canada | US Letter | Auto | Small |
+| Photo-scanned documents to email | A4 or Letter by region | Portrait | Small |
+| Slides or screenshots to read on a screen | Fit to image | Auto | None |
+| Mixed receipts of odd shapes | Fit to image | Auto | None |
+| Sending to someone in another region | Their local size, or fit to image | Auto | Small |
+
+## A short worked example
+
+Suppose you photograph four pages of a rental agreement with your phone, and each photo is 3000 x 4000 pixels in portrait. You live in Germany and want to print the result.
+
+1. Open Image to PDF and add the four photos in order.
+2. Choose A4, orientation Auto, margin Small.
+3. The photos have a 3:4 shape (ratio about 1.33), while A4 is about 1.41. Each photo fills the page width less the margin, with a little extra white at top and bottom.
+4. Download and print at actual size on A4 paper.
+
+If you had chosen Letter instead, the photos would sit on a page that is closer to their own shape, leaving less white space, but your German printer tray would still be A4, so you would be forced into a scaling step. Match the page size to the paper you will use.
+
+Because the tools run in your browser, the images are processed on your device. For background on that, see [is it safe to use online PDF tools](/blog/is-it-safe-to-use-online-pdf-tools/).
+
+## Next steps
+
+- Build a PDF with your chosen page size, orientation and margin in [Image to PDF](/image-to-pdf/), or use [JPG to PDF](/jpg-to-pdf/) for phone photos.
+- Read [how to convert images to PDF](/blog/how-to-convert-images-to-pdf/) for the full workflow.
+- If a print result still looks wrong, check [fix common PDF errors](/blog/fix-common-pdf-errors/).

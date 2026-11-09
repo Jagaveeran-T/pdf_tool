@@ -1,0 +1,88 @@
+---
+title: "Compress PDF User Guide: Shrink a PDF and Know What You Trade Away"
+description: "Task-based guide to the Compress PDF tool: choose between keeping text selectable or flattening pages, set a size target, read the result and avoid common mistakes."
+date: "2026-11-09"
+category: "Guides"
+---
+
+This guide is organised around the jobs people actually bring to the [Compress PDF](/compress-pdf/) tool: getting a file through an email limit, meeting an upload cap on a government or job portal, or simply shrinking a heavy scan. The tool has two modes with very different consequences, so the most useful thing to do first is decide which one you need. If you want a shorter overview of the reasons PDFs grow, the article on [keeping PDF file size down](/blog/reduce-pdf-file-size-tips/) is a good companion.
+
+## Decide first: which mode do I need?
+
+Ask yourself two questions. Does the document need to stay searchable and selectable? And is there a fixed size you must stay under?
+
+If the text must remain selectable, or if you have no fixed size in mind, start with **Keep text selectable**. It shrinks only the JPEG pictures inside the file and leaves everything else alone. If you must hit a number such as 200 KB, or the file is a scan whose pictures the first mode cannot touch, use **Flatten pages to images**. It is the only mode that accepts a size target, and it works on any readable PDF.
+
+| Situation | Suggested mode |
+|---|---|
+| Brochure or slide deck with photos | Keep text selectable |
+| Report with a few large pictures | Keep text selectable |
+| Phone-scanned form for an upload portal with a size cap | Flatten pages to images, with a target |
+| Text-only contract that is already small | Neither will help much |
+| Scan stored as black-and-white fax images | Flatten pages to images |
+
+## Walkthrough 1: shrink pictures but keep the text
+
+1. Open the tool and add your PDF. A thumbnail and the page count appear, which is your confirmation that the right file was read.
+2. Leave **Keep text selectable** chosen and pick **Balanced**.
+3. Press **Compress PDF** and wait for the progress bar to finish. The tool reads each JPEG image in the file, scales it down if it is larger than the level allows, and saves it again at a lower quality.
+4. Look at the result panel. It shows the original size, the new size and the percentage saved.
+5. Download, open the file and zoom in on small print.
+
+If the saving is smaller than you hoped, go back and choose **Smaller**, then **Smallest** if you still need more. Each step trades a little more sharpness for size. Because the tool only replaces an image when the new version is clearly smaller, a higher level never makes things worse; it just may find nothing to change.
+
+### What if it says it found nothing to shrink?
+
+That message means the file has no plain JPEG images this mode is willing to touch. Common reasons are that the PDF is text and vector graphics only, that its pictures are stored with lossless compression, that they are CMYK images from a print workflow, or that they carry transparency masks. These are skipped deliberately, since changing them risks visible damage. Your original is returned unchanged. If the file is a scan, try flatten mode.
+
+## Walkthrough 2: reach a specific size
+
+1. Add the PDF and choose **Flatten pages to images**. A warning appears; read it. Every page will become a picture.
+2. Choose a **Size target**: under 100 KB, 200 KB, 500 KB or 1 MB. Leave it on "No target" if you would rather use the quality level.
+3. Consider the **black and white** option if the document is a text scan. It often saves a worthwhile amount.
+4. Press **Compress PDF**. The tool renders the pages at a sharp setting first, then moves up or down a ladder of resolution and quality settings. It halves the search range each time, so it needs at most four attempts, and it keeps the best result that fits.
+5. Read the result. If the target was met, you see the new size. If not, the panel says what size the smallest setting reached.
+
+A target is an aim. As a rough feel, a single clean page often fits within 200 KB, a handful of pages fits within 500 KB, and a long scanned report will not fit within 100 KB without becoming unreadable. When the tool cannot reach your number, the right next step is to split the document, send fewer pages, or ask the receiver whether a higher limit is possible, not to push quality lower until the text turns to mush.
+
+## Reading the result panel
+
+After each run you see one of three outcomes.
+
+- **Smaller file:** the panel shows the before and after sizes and the percentage saved, plus a note when something needs your attention.
+- **Target missed:** you still get the smallest file the tool could make, with an explanation of how close it came.
+- **Unchanged:** the panel says it could not make the file smaller, and the download is your original, byte for byte. Nothing was lost, and nothing was gained.
+
+In every case, the file was processed in your browser. You can confirm that nothing is uploaded by watching the Network tab in your browser's developer tools while the tool runs.
+
+## Checks before you send the file
+
+Compression is lossy, so always check the output with your own eyes.
+
+- Zoom in on the smallest text, such as footnotes and tables.
+- Check numbers: amounts, dates, reference codes and phone numbers. Blurry digits are the usual reason for a rejected document.
+- Check stamps, signatures and thin lines. They can fade at the lowest settings.
+- Check colours if they carry meaning, such as colour-coded charts. Greyscale removes that information.
+- If you used flatten mode, remember that the text cannot be selected or searched, which also means screen readers cannot read it.
+
+Keep your original file and give the compressed version a different name.
+
+## Limits you should know
+
+- One file at a time, up to 50 MB.
+- Keep text mode handles up to 300 pages. Flatten mode handles up to 60 pages, because it draws each one.
+- Password-protected or encrypted PDFs are rejected. The tool does not remove passwords.
+- There is no text recognition (OCR). Flattened pages stay pictures of text.
+- Large files can fail on phones and older computers because browsers have a limited memory budget. Close other tabs, try a computer, or split the file first with [Split PDF](/split-pdf/).
+
+## Troubleshooting
+
+- **The tool says the PDF is encrypted.** Open it in a PDF viewer you trust, save an unprotected copy if you are allowed to, and use that copy.
+- **The tool says the PDF could not be read.** The file may be damaged or incomplete. Try downloading it again, or open it in a viewer and export it again. The article on [fixing common PDF errors](/blog/fix-common-pdf-errors/) goes through the usual causes.
+- **The result is not much smaller.** The file probably has little to shrink. Try the next level down, or flatten mode if you can accept losing selectable text.
+- **The page failed or froze on a phone.** The file is too large for the device. Use a computer, or split the PDF into parts, compress each part, and join them again with [Merge PDF](/merge-pdf/) if you must have a single file.
+- **Pages look soft or pale.** Choose a higher quality level or a larger target. If you used greyscale, turn it off for colour documents.
+
+## A sensible workflow for scans
+
+If your source is a paper document, the best compression happens before the PDF exists. Scan at 150 to 200 dpi rather than 600, use greyscale for text pages, and keep the photo-style colour setting for pictures only. The article on [scanning documents with your phone](/blog/scan-documents-with-your-phone/) covers lighting, framing and saving. Once you have your pictures, [Image to PDF](/image-to-pdf/) or [JPG to PDF](/jpg-to-pdf/) builds the PDF, and this compressor is the finishing step if the file is still too big.

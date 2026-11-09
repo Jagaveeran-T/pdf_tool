@@ -1,0 +1,120 @@
+---
+title: "Is It Safe to Use Online PDF Tools? What to Check First"
+description: "How upload-based and in-browser PDF tools differ, what to check before trusting any site with a document, and what this site does and does not promise."
+date: "2026-11-08"
+category: "Explainers"
+---
+
+Most of us have done it: a form needs to be a single PDF, the deadline is close, and a search result promises a free fix. You drag your document onto a web page and hope for the best. Whether that is a reasonable thing to do depends far less on the word "online" than on what the page does with your file after you drop it.
+
+This article explains the two basic designs of online PDF tools, gives you a short checklist you can run yourself in a couple of minutes, and says plainly what this site does and does not promise. No online tool can be declared safe in every situation, so the goal here is to help you judge each case rather than hand you a blanket answer.
+
+## Two very different designs
+
+### Upload-based tools
+
+The traditional design works like this. You select a file, your browser sends a copy to the company's server, software on that server does the work, and you download the result. The file has to travel across the internet and sit, at least briefly, on a machine you do not control.
+
+That is not automatically a problem. Many upload-based services are run by established companies with published retention rules, such as deleting files after a stated period. But your safety then rests on things you cannot observe directly: how long the copy really stays there, who inside the company or its hosting providers can access it, how well the storage is protected, and what happens if something goes wrong.
+
+### In-browser tools
+
+The other design does the work on your own device. The page downloads a program written in JavaScript, and that program reads your file in your browser's memory, builds the new PDF there, and hands it back for you to save. The file never needs to leave your computer or phone for the tool to function.
+
+The tools on this site are built this way. [Merge PDF](/merge-pdf/), [Split PDF](/split-pdf/), [Image to PDF](/image-to-pdf/) and [JPG to PDF](/jpg-to-pdf/) run in your browser, and files are not uploaded by these tools. That removes a whole category of exposure, because there is no server-side copy to retain, lose or leak.
+
+It does not remove every risk, which the rest of this article covers.
+
+| Question | Upload-based | In-browser |
+|---|---|---|
+| Does your file travel to a server? | Yes, by design | Not needed for the tool to work |
+| Where is it processed? | On the provider's machines | In your browser tab |
+| What do you rely on? | The provider's retention and security practices | The page's code doing what it says |
+| Works offline after loading? | Usually no | Sometimes, depending on the page |
+| Limited by your device? | Rarely | Yes, large files can run out of memory |
+
+## A practical checklist
+
+### 1. Look for HTTPS
+
+The address should begin with https:// and your browser should show a padlock or similar indicator. HTTPS encrypts the connection between your browser and the site so that others on the network cannot read or alter the traffic in transit. It is a baseline, not a certificate of trustworthiness. A malicious site can also have HTTPS, so treat it as necessary rather than sufficient.
+
+### 2. Read the privacy policy
+
+Skim it for specific statements, not just friendly adjectives. Does it say whether file contents are uploaded? Does it describe how long files are kept? Does it name which third parties receive data, such as advertising or analytics providers? A vague policy, or no policy, is itself information. You can read the [privacy policy](/privacy-policy/) for this site, and the [FAQ](/faq/) covers common questions in plainer language.
+
+### 3. Check whether your file is actually uploaded
+
+You do not have to take anyone's word for how a tool works. Modern browsers include developer tools that show network activity, and you can use them to see whether your file leaves your device:
+
+1. Open the tool page, but do not add a file yet.
+2. Open developer tools. On most desktop browsers, press F12 or Ctrl+Shift+I (Cmd+Option+I on a Mac), then pick the **Network** tab.
+3. Clear the list, then add a file and run the tool.
+4. Watch the requests that appear. A large upload shows up as a request, often a POST, with a size roughly matching your file.
+5. For a test, use a harmless document, such as a few blank pages or a public leaflet, rather than anything private.
+
+If you add a 20 MB file and no request anywhere near that size appears, the file is being handled locally. You may still see small requests for fonts, ads, or analytics, which brings us to the next point. This check is a useful signal, but it is a snapshot of the page as it behaves today, and it takes some comfort with reading network logs. If you are unsure how to interpret what you see, treat the result cautiously.
+
+### 4. Notice who runs the site
+
+Look for an about page and a way to contact the operator. A site with no identifiable owner and no contact details gives you nobody to ask when something goes wrong. See the [about](/about/) and [contact](/contact/) pages here for an example of what to expect.
+
+### 5. Be wary of installers and extensions
+
+A browser-based tool should not ask you to install anything. If a site pushes you to download a program, add a browser extension, or sign up with a payment method for a simple merge, step back. The convenience is rarely worth the added exposure.
+
+## How sensitive is the document?
+
+Different documents deserve different levels of care.
+
+- **Low sensitivity:** a public flyer, lecture slides, a recipe collection. Almost any reputable tool is fine.
+- **Moderate:** your CV, a utility bill, a rental application. Prefer a tool that processes locally, and check the privacy policy.
+- **High:** passports, national ID scans, bank statements, medical records, signed contracts, anything covered by a confidentiality agreement. For these, consider whether you need an online tool at all.
+
+For high-sensitivity files, one option is software installed on your own computer from a source you already trust, used offline. Another is to ask whether your employer, school or bank provides an approved tool. If you are bound by a confidentiality obligation, follow your organisation's rules, which may prohibit third-party web tools regardless of how they work.
+
+Also consider the whole path of the file, not just the tool. A merged PDF still sits in your Downloads folder, may sync to a cloud drive, and may be attached to an email. The tool is one link in the chain.
+
+## What this site does and does not guarantee
+
+Being precise matters more than sounding reassuring, so here is the straightforward version.
+
+**What this site does:**
+
+- Runs its PDF tools in your browser. Files you select are read by your browser and processed on your device.
+- Does not upload your files through these tools.
+- Does not require an account to use them.
+
+**What this site does not claim:**
+
+- It does not claim that nothing can ever go wrong. Browsers, operating systems, extensions and your own device are outside our control. A browser extension that can read page content, or malware on your computer, could see your files regardless of which website you use.
+- It does not promise that every file will process successfully. Very large files can exceed what a phone or low-memory computer can handle, and in that case the tool shows an error rather than a result.
+- It does not remove passwords from protected PDFs. Encrypted files are rejected with a message.
+- It does not make legal, compliance or confidentiality judgments for you.
+
+### Ads and analytics
+
+This site shows ads and may use optional analytics. These are separate from the file processing: the content of your documents is not sent to the ad or analytics systems by the tools. But ad and analytics providers can collect information such as page views, device and browser details, and may use cookies or similar technologies, subject to your consent settings and local rules. The [privacy policy](/privacy-policy/) describes this in more detail, and you can limit it with your browser's privacy settings or a content blocker if you prefer.
+
+Seeing network requests to advertising or analytics domains in the Network tab is therefore expected on a site like this. The thing to look for is whether your document's bytes are part of any request.
+
+## Warning signs on any tool
+
+- It asks for an email address or account before doing a basic task, with no clear reason.
+- It claims "military-grade" or "100% secure" protection without explaining anything specific.
+- The privacy policy is missing, generic, or contradicts what the page says.
+- It silently emails you the result, or offers to "store" your files in the cloud when you did not ask.
+- The page is plastered with misleading download buttons that are really ads.
+- It asks for permissions that have nothing to do with PDFs, such as notifications or location.
+
+## Habits that help regardless of the tool
+
+- Work on a copy, not your only original.
+- Remove pages you do not need to share. With [Split PDF](/split-pdf/) you can extract just the pages that matter before sending a document onward.
+- Check the output before sending it: open it, scroll through, and confirm the pages and order are right.
+- Keep your browser and operating system updated.
+- Close the tab when you are finished, and delete temporary files you no longer need.
+
+## Next steps
+
+If you want tools that process files in your browser, try [Merge PDF](/merge-pdf/) to combine documents, [Split PDF](/split-pdf/) to extract pages, or [JPG to PDF](/jpg-to-pdf/) to turn photos into a document. For background on how merging works, see [how to merge PDF files for free](/blog/how-to-merge-pdf-files-free/), and if something goes wrong, [fix common PDF errors](/blog/fix-common-pdf-errors/) covers the usual causes.

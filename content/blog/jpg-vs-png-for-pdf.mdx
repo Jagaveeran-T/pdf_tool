@@ -1,0 +1,97 @@
+---
+title: "JPG vs PNG for PDF: Which Image Format Should You Use?"
+description: "How JPEG and PNG differ for PDF creation: compression, photos versus screenshots, transparency, file size, and how this site embeds each format."
+date: "2026-11-08"
+category: "Explainers"
+---
+
+When you turn pictures into a PDF, the format of each picture affects three things you will notice: how sharp the text looks, how large the file ends up, and whether transparent areas behave. JPEG and PNG are the two formats people meet most often, and they were designed for different jobs. This explainer sets out how they differ and what that means when you build a PDF with [Image to PDF](/image-to-pdf/) or [JPG to PDF](/jpg-to-pdf/).
+
+## The core difference: lossy and lossless
+
+**JPEG (JPG)** uses lossy compression. To make files small, it discards fine detail that the human eye is less likely to notice, such as subtle colour variation in a sky. Every time a JPEG is saved again from edited pixels, a little more detail can be lost, and higher compression settings produce visible blockiness and smudging around sharp edges.
+
+**PNG** uses lossless compression. It stores the exact pixels and finds ways to describe them more compactly, much as a ZIP file does with data. What you save is what you get back. The cost is that PNG files of photographs are often much larger than equivalent JPEGs.
+
+That one difference explains almost everything else in this article.
+
+## Photos: JPEG is usually the natural fit
+
+A photograph is full of gradual changes: skin tones, fabric, clouds, shadows. JPEG's way of discarding detail suits this content well, which is why cameras and phones save JPEG by default. A 12-megapixel phone photo might be a few megabytes as JPEG. Saved as PNG, the same picture could be several times larger, with no visible benefit.
+
+For a PDF of photographs, such as holiday pictures, property photos or a phone scan of a paper page, JPEG is usually the practical choice. Phone scans of documents fall in this category too, since a photographed sheet of paper is still a photo.
+
+## Screenshots, text and line art: PNG tends to look better
+
+Screenshots, diagrams, logos and charts contain flat colour areas and hard edges. JPEG compression struggles with those. It can leave faint speckles ("ringing") around letters and thin lines, which you notice most on small text. PNG keeps edges crisp, and because flat colour compresses well, the files are often small anyway.
+
+A few examples:
+
+- A screenshot of a confirmation page: PNG will keep the text clean, while a heavily compressed JPEG can look fuzzy.
+- A hand-drawn diagram scanned as a high-contrast picture: PNG works well, provided the scan itself is clean.
+- A company logo with a flat background: PNG.
+- A photo of a printed receipt taken on a phone: JPEG is typical, and fine, as long as the photo was taken in good light.
+
+## Comparison at a glance
+
+| Aspect | JPEG | PNG |
+| --- | --- | --- |
+| Compression | Lossy | Lossless |
+| Best content | Photographs, shaded images | Screenshots, text, line art, logos |
+| Typical size for a photo | Smaller | Often much larger |
+| Typical size for a flat-colour screenshot | Can be larger than expected or blurry at low quality | Often compact |
+| Transparency | Not supported | Supported |
+| Edge sharpness | Can show artefacts | Crisp |
+
+These are tendencies, not rules. A noisy screenshot of a photograph inside a web page can be big as PNG, and a carefully saved high-quality JPEG of a diagram can look fine.
+
+## Transparency
+
+PNG can store transparent areas, so an image such as a cut-out product picture or a signature on a see-through background does not have a box around it. JPEG has no transparency at all.
+
+A PDF page is not transparent by default, so what shows behind a transparent PNG matters. In Image to PDF, PNG transparency is kept and the image appears over a white page. For a black signature on a transparent background, that gives you a black signature on white, which is usually exactly what you want. If you expected a coloured or patterned page behind it, the tool does not provide that.
+
+## How this site embeds each format
+
+Knowing what happens inside the tool helps you decide whether to convert beforehand.
+
+- **JPEG:** the original JPEG data is embedded as it is, with no re-compression. The file is not re-encoded, so the PDF does not add a second round of loss. The one exception is EXIF rotation, covered below.
+- **PNG:** the pixels are embedded losslessly. Transparency is retained against a white page.
+- **WebP:** the browser decodes the image, and the tool embeds it as PNG. The pixels are preserved, but because PNG is lossless and WebP is often compact, the PDF may be larger than the original WebP file suggests.
+
+Each image is scaled to fit inside the page and centred, never cropped. JPG to PDF accepts only JPEG files, checked by file signature rather than only by extension, which keeps the options simple for phone photos. If you want to see how page sizes affect the layout, read [PDF page size and orientation](/blog/pdf-page-size-and-orientation-a4-letter/).
+
+## File size trade-offs
+
+The PDF is, roughly, the sum of its images, so image choice is the main lever on size.
+
+- **Many JPEG photos:** each is embedded unchanged, so a PDF of ten 4 MB photos will be somewhere around 40 MB. If you need less, start with smaller photos. Many phones and photo apps have an option to resize or choose a lower resolution before you share.
+- **PNG screenshots:** often modest, but PNG photographs can be heavy. Avoid converting photos to PNG "for quality." You gain no detail the JPEG did not already have, and the file only grows.
+- **WebP sources:** expect growth after embedding as PNG.
+
+The image-to-PDF tools do not compress images. Resize or re-export the images first if you need a smaller result, and see [reduce PDF file size tips](/blog/reduce-pdf-file-size-tips/) for approaches that fit with that limitation. Limits also apply: both Image to PDF and JPG to PDF accept up to 50 files, 50 MB each and 200 MB in total.
+
+## EXIF rotation, in plain terms
+
+Phones usually do not rotate pixels when you shoot a photo in portrait. Instead they store the picture in the sensor's orientation and add an EXIF flag that says "display this rotated." Photo viewers read the flag and show the picture upright.
+
+A PDF builder that ignores the flag would produce a sideways page. To avoid that, when a JPEG carries a rotation flag, the tools on this site redraw it upright and save it again as JPEG at quality 0.92. That is slightly lossy, which is why we describe it as an exception to "embedded unchanged." Unflagged JPEGs, which includes most scans from dedicated scanner apps, are not re-encoded. If you want zero re-encoding, rotate and save the photo upright in an editor first, so the flag is no longer needed.
+
+## A note on WebP
+
+WebP is common on websites, and some browsers save images in that format when you choose "Save image as." Image to PDF accepts WebP, but JPG to PDF does not. Because WebP is embedded as PNG, a small WebP photograph can give a surprisingly big PDF page. If size matters and you have a choice, get the JPEG or PNG version of the image from the source.
+
+## Which should you pick?
+
+- Phone photos or scans of paper: keep them as JPEG.
+- Screenshots and diagrams: PNG, and try not to resave them as JPEG.
+- A signature or logo needing transparency: PNG.
+- Mixed bundle: no need to convert. Both formats can be added in one run to [Image to PDF](/image-to-pdf/).
+- Anything where file size matters: choose the smaller or lower-resolution source before converting.
+
+## Next steps
+
+- Convert JPEG-only batches with [JPG to PDF](/jpg-to-pdf/) or mixed formats with [Image to PDF](/image-to-pdf/).
+- Follow the full workflow in [how to convert images to PDF](/blog/how-to-convert-images-to-pdf/).
+- If you are photographing paper, read [scanning documents with your phone](/blog/scan-documents-with-your-phone/).
+- Browse the [Image to PDF guide](/guides/image-to-pdf-guide/) for options in detail.

@@ -1,0 +1,110 @@
+---
+title: "How to Keep PDF File Size Down: At the Source and Afterwards"
+description: "Why PDFs get large and how to prevent it at the source: photo resolution, scanner settings, JPEG vs PNG, page size, and splitting for email limits."
+date: "2026-11-08"
+category: "Guides"
+---
+
+A PDF that will not fit through an email attachment limit is one of the more irritating small problems of office life. The usual advice is "just compress it", and this site has a [Compress PDF](/compress-pdf/) tool for that. It is deliberately limited: it shrinks JPEG images inside a file, or flattens pages into pictures when you need a size target, and it cannot promise a result.
+
+That limitation is worth being upfront about, because it shapes what useful advice looks like. You can still do a lot to keep files small, mostly by controlling what goes into the PDF before it is built. This article explains why PDFs get large, which choices at the source matter most, and which tasks the tools on this site can help with.
+
+## Why PDFs get large
+
+A PDF is a container. The text, fonts, vector drawings and images inside it each take space, but for most files people struggle with, one thing dominates: images.
+
+Consider a page of plain text. It might be tens of kilobytes. Now consider a scan of that same page, stored as a photograph of paper. At typical scan resolution it is a full-page picture, often hundreds of kilobytes to several megabytes. A 30-page scanned document can therefore be far larger than a 30-page document created directly from a word processor.
+
+Several factors decide how big an image-based PDF becomes:
+
+- **Pixel dimensions.** A photo of 4000 by 3000 pixels holds 12 million pixels. One of 2000 by 1500 holds 3 million, a quarter as many.
+- **Compression type.** JPEG is lossy and usually produces much smaller files for photographs. PNG is lossless and tends to be larger for photographic content, though it can be efficient for flat-colour graphics.
+- **Quality setting.** For JPEG, the quality level when the image was saved affects size considerably.
+- **Number of pages.** Obvious, but it multiplies everything else.
+- **Embedded fonts and extras.** Usually minor next to images, but they add up in some documents.
+
+## What happens to images in this site's tools
+
+Knowing what the tools do tells you where your control lies.
+
+- **JPG to PDF** embeds your JPEG data as it is, with no re-compression. The PDF is therefore about as large as the sum of your photos, plus a small overhead. The exception is a photo with an EXIF rotation flag: it gets redrawn upright and saved again as JPEG at quality 0.92, which can change its size somewhat.
+- **Image to PDF** does the same for JPEGs. PNG files are kept lossless, and WebP images are decoded by the browser and embedded as PNG, which can make the file larger than the original WebP.
+- **Merge PDF** and **Split PDF** work on existing PDFs and do not re-compress their contents.
+
+Put simply, the output size is mostly set by the files you feed in. Get the inputs right and the PDF follows.
+
+## Fix size at the source
+
+### Start with sensible image resolution
+
+For a document that will be read on screen or printed on ordinary paper, you rarely need the full resolution of a modern phone camera. Some rough arithmetic helps.
+
+An A4 page is about 8.27 by 11.69 inches. At 150 pixels per inch, that is roughly 1240 by 1750 pixels. At 300 pixels per inch, it is about 2480 by 3510 pixels. A phone photo of 4000 by 3000 pixels is already beyond 300 dpi for a full A4 page.
+
+So if a photo is far larger than your needs, reduce it before conversion. You can do that in any photo editor or viewer that offers a resize or export-at-smaller-size option, including the ones built into phones and computers. Aim for something like 1600 to 2500 pixels on the long side for a typical document page, then check that small text remains readable. If you are not sure, try one page first and compare.
+
+### Choose JPEG for photographs and scans
+
+For anything that looks like a photograph, including a camera scan of paper, JPEG usually gives a far smaller file than PNG. For screenshots with large areas of flat colour and sharp text, PNG can be competitive or even smaller. The article on [JPG vs PNG for PDF](/blog/jpg-vs-png-for-pdf/) goes through the trade-offs in detail. As a starting point:
+
+| Content | Usually better choice |
+|---|---|
+| Phone photo of a paper page | JPEG |
+| Photo of a person or place | JPEG |
+| Screenshot of an app with flat colour | PNG, but compare |
+| Logo or diagram with sharp edges | PNG, but compare |
+
+### Adjust scanner settings
+
+If you use a flatbed or document scanner, its settings often matter more than anything you do afterwards:
+
+- Pick 150 to 200 dpi for ordinary text documents you only need to read, and reserve 300 dpi or above for things you will print at high quality or that contain fine detail.
+- Use black and white or greyscale for plain text pages instead of full colour, if your scanner offers it. Fewer colours means less data. Remember that some scanner software saves directly as PDF with its own compression, so check what it produces.
+- Scan at the real paper size, and crop out empty borders or the scanner bed.
+- Save as JPEG at a medium-high quality rather than the maximum. Differences between the top two or three quality levels are often hard to see but can change the size noticeably.
+
+If you scan with a phone, see [how to scan documents with your phone](/blog/scan-documents-with-your-phone/) for framing and resolution advice.
+
+### Match page size to your images
+
+The "Fit to image" page size option in [Image to PDF](/image-to-pdf/) makes each page match its image, so nothing is padded or resized to a standard sheet. That does not change the image data, but it avoids white margins and ensures the page is as big as the picture suggests. Choosing A4 or US Letter places the image within a standard sheet, centred and never cropped. This changes how the document looks and prints, not its file size in any meaningful way, because the image bytes are the same either way. Choose by purpose: A4 or Letter for printing and forms, fit-to-image for pictures. More on this is in [PDF page size and orientation](/blog/pdf-page-size-and-orientation-a4-letter/).
+
+### Drop pages you do not need
+
+Every page costs something. If a scanned file includes a blank back side, a cover sheet or ten pages of terms and conditions, leave them out. With the original images, simply do not add the unneeded ones to the list. With an existing PDF, [Split PDF](/split-pdf/) can extract just the pages you want into a new file: enter a range such as 1-3, 5, 8-10 and download the result. The original stays untouched, so you can try different selections.
+
+This is a good fit for long documents where only a few pages matter. A 60-page report from which you need pages 12 to 15 becomes a four-page file, which is dramatically smaller.
+
+## Splitting for email limits
+
+Many email providers limit the total size of attachments, commonly somewhere around 20 to 25 MB, though the exact number varies, so check yours. If your PDF is just over the limit, splitting it into parts and sending several emails can be a workable answer.
+
+With Split PDF you can:
+
+1. Load the PDF.
+2. Choose "Separate files per range" and type one range per part, for example 1-10, 11-20, 21-30.
+3. Download the ZIP containing the parts.
+4. Attach them separately and name them clearly, such as "contract-part-1-of-3".
+
+Tell the recipient how many parts there are and in what order they go. If they later want one file, [Merge PDF](/merge-pdf/) can put the parts back together in order, as described in [how to merge PDF files for free](/blog/how-to-merge-pdf-files-free/).
+
+This is a workaround, not a size reduction. The total amount of data stays the same. It simply spreads across multiple messages.
+
+## Other approaches that exist in general
+
+A brief overview of the wider landscape, including what this site does and does not cover:
+
+- **The Compress PDF tool on this site.** It runs in your browser and offers two modes: shrink embedded JPEG images while keeping text selectable, or flatten pages to images to aim for a size such as 200 KB. It cannot help with text-only files, and flattening removes selectable text.
+- **Dedicated compression features elsewhere.** Many PDF editors, operating-system tools and online services can re-compress images inside an existing PDF at a lower quality or resolution. They typically trade visible quality for size, and results vary a lot by document.
+- **Re-exporting from the source.** If you made the PDF from a word processor or presentation program, exporting again with a "smaller size" or "minimum size" option can help.
+- **Sharing a link instead of an attachment.** If the file is large for a good reason, such as a high-quality portfolio, a shared download link may suit better than an email attachment.
+
+If you use any of these, keep your original, compare the result with it, and check the files for readability, especially small print, before sending. And if the document is sensitive, apply the same care described in [is it safe to use online PDF tools](/blog/is-it-safe-to-use-online-pdf-tools/).
+
+## A quick example
+
+Imagine ten phone photos of a lease agreement, each 4000 by 3000 pixels and about 4 MB. Converted directly, the PDF would be roughly 40 MB, give or take a little overhead. If instead you resized each photo to about 2200 pixels on the long side and saved it as a medium-high quality JPEG, each might fall well under 1 MB, and the PDF would be a fraction of the size. The exact numbers depend on the picture content and your editor, so treat these as an illustration, not a promise. Test one page first.
+
+## Next steps
+
+Prepare your images at a sensible size, then build the PDF with [JPG to PDF](/jpg-to-pdf/) or [Image to PDF](/image-to-pdf/). If you already have a large PDF, use [Split PDF](/split-pdf/) to extract only the pages you need or to cut it into email-sized parts.

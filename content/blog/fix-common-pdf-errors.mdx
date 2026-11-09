@@ -1,0 +1,137 @@
+---
+title: "Fix Common PDF Errors: Passwords, Corrupt Files, No Pages"
+description: "What PDF error messages mean and what to do: password-protected files, corrupt downloads, memory limits on phones, wrong extensions and blank pages."
+date: "2026-11-08"
+category: "Troubleshooting"
+---
+
+PDF problems usually look dramatic and turn out to be one of about six causes. The file is locked with a password, it was cut short during download, it is too big for the device, it is not really a PDF, or it is fine and the page itself is blank. This article walks through each cause, explains what the tools on this site are telling you when they refuse a file, and ends with a table you can scan when you are in a hurry.
+
+One honest point first, because people ask. The tools on this site cannot unlock password-protected PDFs. They do not remove or guess passwords, and they do not add them either. The sections below cover what you can legitimately do instead.
+
+## Password-protected (encrypted) PDFs
+
+A PDF can be protected in two ways. An open password means you cannot view the file at all without it. A permissions password lets anyone open and read the file, but restricts actions such as printing, copying text or editing. Both are forms of encryption, and the [Merge PDF](/merge-pdf/) and [Split PDF](/split-pdf/) tools reject encrypted files with a clear message instead of trying to process them.
+
+Why reject rather than work around? Processing an encrypted file would mean either failing in confusing ways or bypassing a protection someone put there on purpose. These tools do neither.
+
+### What you can do instead
+
+- **Use the password in a PDF viewer.** If you have the password, open the file in a normal PDF viewer, enter it, and look for a print or save option. Some viewers let an authorised user save an unprotected copy, depending on how the document was set up. Whether that is allowed is up to the document's owner.
+- **Ask the sender.** If a bank, school or employer sent you a protected file and you do not know the password, ask them. Passwords are often based on something you were told, such as a reference number or date, and the sender can tell you the rule or issue an unprotected copy.
+- **Request a different version.** A sender can usually export the same document without protection or with only a permissions restriction, which is simpler to share.
+- **Do not use it if it is not yours.** If you did not receive the file legitimately, there is no honest workaround, and this site will not offer one.
+
+If you end up with an unprotected copy from the sender, you can then merge or split it normally.
+
+## Corrupt or truncated files
+
+A corrupt PDF is one whose internal structure is damaged. A PDF stores an index near the end of the file that tells readers where each page lives. If a download stops early or a file copy fails, that index is missing and readers cannot find the pages.
+
+Common causes:
+
+- an interrupted or very slow download;
+- an email attachment that was clipped or re-encoded by a mail system;
+- a file saved from a "preview" in a browser and not completed;
+- a full drive or SD card during saving;
+- a file transferred between devices with a flaky cable or connection.
+
+Signs: the file size is suspiciously small (a 40-page report that is only a few kilobytes), the viewer reports "unexpected end of file" or "damaged", or the tool on this site says it could not read the PDF.
+
+### Fixes, in order of effort
+
+1. **Download or copy it again.** This fixes most cases. If the second copy has a different size from the first, the first was incomplete.
+2. **Ask for a fresh export.** If it came from email, have the sender re-send it, ideally zipped or through a share link, since zip checks help catch damage.
+3. **Try a second viewer.** Some viewers repair minor damage on open. If one displays the pages, you may be able to print or save from that viewer to create a clean copy, then use that copy here.
+4. **Go back to the source.** If you made the PDF yourself from a document or images, regenerate it. The [Image to PDF](/image-to-pdf/) tool can rebuild a scan-based PDF from the original photos.
+
+## File too large, or "out of memory"
+
+Everything on this site runs in your browser. The file is read into your device's memory and processed there. That is good for privacy, but it also means that a phone with limited free memory can run out of room well before the stated limits are reached.
+
+The tools have the following limits:
+
+- Merge PDF: 2 to 20 files, 50 MB each, 200 MB total.
+- Split PDF: one file up to 50 MB and 500 pages.
+- Image to PDF: up to 50 images, 50 MB each, 200 MB total.
+- JPG to PDF: up to 50 photos, 50 MB each, 200 MB total.
+
+If a file is over a limit, you will see a message about size. If it is under the limit but the browser struggles, you may see a message that the operation failed or that memory ran out. The tools report this rather than crash, but there are no guarantees on a low-memory device.
+
+What helps:
+
+- **Close other tabs and apps** to free memory, then retry.
+- **Work in smaller batches.** Merge ten files at a time, then merge the results. Convert 15 photos, then the next 15.
+- **Split a large PDF into parts** with [Split PDF](/split-pdf/), using the "Separate files per range" mode (for example 1-10, 11-20, 21-30), and handle the parts separately.
+- **Use a laptop or desktop** for big jobs if you have one.
+- **Choose smaller photos** before conversion. Many phones can shoot at a lower resolution, or you can pick lower-resolution copies. The [reduce PDF file size tips](/blog/reduce-pdf-file-size-tips/) article covers this. The [Compress PDF](/compress-pdf/) tool can also shrink an existing PDF, within the limits described on its page.
+
+## "No pages" or a PDF that looks empty
+
+A "no pages" message means the tool opened the file but found zero page entries. That happens with damaged files, files that are not really PDFs, or documents generated incorrectly by some software. Treat it like corruption: get a fresh copy or re-export.
+
+A related problem is a PDF that opens but shows blank pages. Check:
+
+- **Is the content a background colour?** White text on a white page, or a page where the content is very faint, looks blank.
+- **Is it a scan that failed?** A scanner sometimes saves white sheets if the paper was not detected. Rescan it.
+- **Did the viewer finish loading?** Large pages can take a moment; wait and scroll.
+- **Is it a form whose fields are not rendering?** Different viewers handle forms differently. Try another viewer.
+- **Did you pick the wrong pages?** In Split PDF, make sure your range such as "1-3, 5, 8-10" matches real page numbers in the file.
+
+If the file is blank in every viewer, the PDF itself is blank, and nothing you do here can restore content that was never saved.
+
+## Extension says PDF, but the file is not
+
+A file name ending in .pdf does not make it a PDF. Files can be renamed, exported incorrectly, or be an HTML error page saved with a .pdf name when a download failed. Real PDFs begin with the characters %PDF- at the very start of the file. The tools on this site check file contents, not just the name. JPG to PDF, for example, checks for a real JPEG signature rather than trusting the extension.
+
+Signs of a mismatch:
+
+- The file is tiny, a few kilobytes, for something that should be large.
+- A viewer says it is not a valid PDF.
+- Renaming it to .html or .txt and opening it shows readable text such as "Access denied" or "Session expired".
+
+The fix is to get the right file. If it was a failed download, sign in again and re-download. If you renamed a Word or image file to .pdf by hand, renaming does not convert anything; use the proper export, or turn images into a PDF with the [Image to PDF](/image-to-pdf/) tool.
+
+## What the tool messages mean
+
+The exact wording varies, but the messages fall into these groups.
+
+| Message type | What it means | What to do |
+| --- | --- | --- |
+| Encrypted or password-protected | The file has an open password or encryption; the tool will not process it | Use the password in a viewer, or ask the sender for an unprotected copy |
+| Could not read or corrupt PDF | The file structure is damaged or incomplete | Re-download, request a fresh export, or regenerate |
+| Not a valid PDF or JPEG | The contents do not match the extension | Obtain the real file; do not just rename |
+| File too large | One file or the total is over the limit | Split, reduce, or process in batches |
+| Too many files or pages | You went over the file-count or page limit | Work in smaller groups |
+| Out of memory or processing failed | The device ran out of room during the job | Close other tabs, use smaller batches or a computer |
+| No pages found | The PDF opened but has no pages | Treat as damaged; get a new copy |
+| Invalid page range | A split range was malformed or out of bounds | Use forms like "1-3, 5, 8-10" within the page count |
+
+## Troubleshooting table by symptom
+
+| Symptom | Likely cause | First thing to try |
+| --- | --- | --- |
+| Asks for a password to open | Open password set | Enter it in a viewer, or ask the sender |
+| Opens in a viewer but the tool rejects it | Encryption on the file | Get an unprotected copy |
+| Tool rejects and the viewer also fails | Corrupt or truncated | Download again |
+| Works on desktop, fails on phone | Memory limit | Fewer or smaller files, close tabs |
+| File size only a few KB | Failed download or wrong file | Re-download |
+| Pages appear blank | Faint content, bad scan or empty file | Try another viewer, rescan |
+| Merged file lost links or form fields | Known limitation of merging | Keep the originals; see below |
+
+## One more limitation to remember
+
+When you merge or split, bookmarks, interactive form fields, accessibility tags and some metadata may not carry over to the new file. If a result seems to be missing bookmarks or fillable fields, that is not corruption. Keep your original files, and for forms, fill them in before combining. The [merge guide](/guides/merge-pdf-guide/) and [split guide](/guides/split-pdf-guide/) cover this in more detail.
+
+## Prevent most problems
+
+- Keep the original files until you are sure the output is correct.
+- Download from the source directly instead of from an email preview.
+- Check the page count and first-page preview in the tool before you merge or split.
+- Avoid renaming files to change their type.
+
+## Next steps
+
+- If your files are healthy, combine them with [Merge PDF](/merge-pdf/) or pull out pages with [Split PDF](/split-pdf/).
+- Read [page ordering and rotation tips](/blog/page-ordering-and-rotation-tips/) for related fixes.
+- Questions about how files are handled? See the [FAQ](/faq/).

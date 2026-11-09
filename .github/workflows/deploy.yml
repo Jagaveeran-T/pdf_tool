@@ -1,0 +1,50 @@
+name: Deploy to Cloudflare Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      deployments: write
+    env:
+      # Set these under Settings > Secrets and variables > Actions > Variables. The strict build fails if the three site values are missing.
+      STRICT_SITE_CONFIG: "true"
+      NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+      NEXT_PUBLIC_SITE_NAME: ${{ vars.NEXT_PUBLIC_SITE_NAME }}
+      NEXT_PUBLIC_CONTACT_EMAIL: ${{ vars.NEXT_PUBLIC_CONTACT_EMAIL }}
+      NEXT_PUBLIC_TARGET_REGIONS: ${{ vars.NEXT_PUBLIC_TARGET_REGIONS }}
+      NEXT_PUBLIC_WEB3FORMS_KEY: ${{ vars.NEXT_PUBLIC_WEB3FORMS_KEY }}
+      NEXT_PUBLIC_CMP_MODE: ${{ vars.NEXT_PUBLIC_CMP_MODE }}
+      NEXT_PUBLIC_ADSENSE_ID: ${{ vars.NEXT_PUBLIC_ADSENSE_ID }}
+      NEXT_PUBLIC_ADS_ENABLED: ${{ vars.NEXT_PUBLIC_ADS_ENABLED }}
+      NEXT_PUBLIC_AD_SLOT_TOOL_BELOW: ${{ vars.NEXT_PUBLIC_AD_SLOT_TOOL_BELOW }}
+      NEXT_PUBLIC_AD_SLOT_ARTICLE: ${{ vars.NEXT_PUBLIC_AD_SLOT_ARTICLE }}
+      NEXT_PUBLIC_GA_ID: ${{ vars.NEXT_PUBLIC_GA_ID }}
+      NEXT_PUBLIC_SENTRY_DSN: ${{ vars.NEXT_PUBLIC_SENTRY_DSN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      # Fails on placeholder text, a *.pages.dev address, missing ads.txt line when ads are on, and similar launch blockers.
+      - run: npm run check:launch
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy out --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME }} --branch=main

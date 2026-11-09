@@ -1,0 +1,117 @@
+---
+title: "Page Order and Rotation: Getting Your PDF Pages Right"
+description: "How to control page order with Merge and Split, name files so they sort correctly, and fix sideways photos before conversion. This site cannot rotate PDF pages."
+date: "2026-11-08"
+category: "How-to"
+---
+
+A finished PDF with page 7 in the middle of page 3's content, or a page lying on its side, looks careless even when the content is perfectly good. Both problems are usually avoidable if you pay attention at the right moment, which is before and during the build rather than afterwards.
+
+This article covers two topics. The first is order: how to arrange pages with the tools on this site, how to name files so they line up, and how to check the result. The second is rotation: how orientation works, why photos sometimes arrive sideways, and how to fix that before conversion. One point up front, so there is no confusion later: this site cannot rotate individual pages inside an existing PDF. What it can do is turn a whole PDF file in Merge PDF, and turn single images in Image to PDF and JPG to PDF, in 90-degree steps.
+
+## Part one: controlling page order
+
+### Order is decided by the list
+
+In [Merge PDF](/merge-pdf/), the final document follows the list on the screen, top to bottom. The same applies in [JPG to PDF](/jpg-to-pdf/) and [Image to PDF](/image-to-pdf/), where each image becomes one page in the order shown. Nothing is sorted for you in the background, so what you see is what you get.
+
+You can drag items to reorder them, and in the image tools there are also move buttons, which are handy on a phone where dragging can be fiddly. Remove anything you do not want before you build.
+
+### Name files so they sort
+
+When you select many files at once, the order in which your system hands them to the page often follows the filename. Naming files carefully means your starting order is already close to right, and you only need to fine-tune.
+
+Good names use a number prefix with leading zeros:
+
+- 01-cover.pdf, 02-introduction.pdf, 03-chapter-one.pdf
+- scan-001.jpg, scan-002.jpg, scan-003.jpg
+
+Leading zeros matter once you pass nine items. Plain "page1, page2, page10" can sort as page1, page10, page2 in text-based sorting, because the character "1" comes before "2". Using 01, 02, 10 avoids that.
+
+Phone cameras number photos in capture order, which is usually what you want for a multi-page scan, but check, because edited or imported photos can get new names or dates.
+
+### Merging in stages for complex documents
+
+If you are assembling something large, such as an application with a cover letter, a CV, certificates and references, work in stages:
+
+1. Put each part in a folder, numbered in final order.
+2. Merge the parts that belong together first, for example all certificates.
+3. Merge the larger pieces last.
+4. Open the result and scroll through it.
+
+Merging in stages makes mistakes easier to find. If page order is wrong in the final file, you know which stage to repeat.
+
+### Reordering pages inside one PDF
+
+Suppose a single PDF has its pages in the wrong sequence. This site has no "reorder pages" tool, but you can get there with Split PDF and Merge PDF together:
+
+1. In [Split PDF](/split-pdf/), choose the mode that saves every page as its own PDF in a ZIP.
+2. Unzip the files on your computer. Names will reflect the page numbers.
+3. Rename them with a prefix in the new order you want.
+4. Add them to [Merge PDF](/merge-pdf/) and arrange the list.
+5. Merge, then check the result.
+
+For smaller jobs there is a shortcut. Split can extract selected pages into one new PDF with a range like "1-3, 5, 8-10", and the output follows the page order of the original, not the order you type, so this is for selecting rather than rearranging. If you need a different order, use the page-by-page method above, or extract the groups separately and merge them in the order you want. For example, to move pages 5 to 6 in front of page 1, extract 5-6 as one file and 1-4 as another, then merge them with the first on top.
+
+Mind the limitations: bookmarks, interactive form fields and some metadata may not carry through a merge or split. If your document relies on those, check the output carefully. For more on the tools, see the [split PDF guide](/guides/split-pdf-guide/) and the [merge PDF guide](/guides/merge-pdf-guide/).
+
+### Check the order before you share
+
+Reading thumbnails is quick if you know what to look for:
+
+- In Merge PDF, each file shows a page count and a first-page thumbnail. Confirm each file's first page matches what you expect and that the list order is right.
+- In Split PDF, the tool shows the page count and a preview of the first page, so you can confirm you loaded the right document before you extract anything.
+- After you build the document, open it in your PDF viewer and use its thumbnail sidebar. Look for page numbers printed on the paper, headings that continue across pages, and tables that start on one page and finish on the next.
+- Watch for orientation: a landscape page among portrait ones appears wider in the thumbnail strip.
+- Check the total page count against what you expect. If ten two-page files should give 20 pages and you got 19, something is missing.
+
+## Part two: orientation and rotation
+
+### Portrait and landscape
+
+A portrait page is taller than it is wide. A landscape page is wider than it is tall. A4 in portrait is 210 by 297 mm, which is about 595 by 842 points, since one point is 1/72 inch. Landscape swaps those numbers. US Letter is 8.5 by 11 inches, or 215.9 by 279.4 mm.
+
+In the image tools, the orientation option can be set to auto, portrait or landscape. Auto follows the shape of each image, so a wide photo gets a landscape page and a tall one gets a portrait page. Forcing portrait or landscape applies one choice to every page, with each image scaled to fit inside and centred, never cropped. "Fit to image" makes the page the same shape as the image. The article on [page size and orientation](/blog/pdf-page-size-and-orientation-a4-letter/) explores these options in more depth.
+
+### Why photos arrive sideways
+
+Phone and camera sensors record pixels in one fixed layout. When you turn the phone to take a portrait shot, many devices do not rotate the pixels. They store an EXIF orientation tag that tells software how to display the image upright. Viewers that respect the tag show it correctly, while software that ignores it shows it on its side.
+
+This site handles the common case. Where a JPEG carries an EXIF rotation flag, the tool redraws it upright and re-encodes it as JPEG at quality 0.92, which is slightly lossy. A JPEG without the flag is embedded with its original bytes, untouched.
+
+Problems can still happen:
+
+- The photo is physically stored sideways, with no flag, for example after another program rotated pixels without saving correctly, or after a scan where the paper was placed sideways.
+- A photo is upside down because the phone was held that way when the picture was taken.
+- Another tool stripped the metadata, leaving the pixels in their raw orientation.
+
+### Fix orientation before conversion
+
+In the image tools, every image has a Rotate control that turns it in 90-degree steps, and the preview shows the result before you convert. A rotated image is redrawn and saved again, so a rotated JPEG loses a very small amount of detail. If you want to avoid any re-encoding, the dependable approach is to fix the image in a photo app first:
+
+1. Open the photo in a viewer or editor on your phone or computer. Most include a rotate command.
+2. Rotate it until it is upright and save it.
+3. Check the saved copy in a second viewer if you can, or look at its thumbnail in a file manager. If it looks right in both, the orientation is baked in properly.
+4. Then add it to the converter.
+
+Do this for each affected photo before building the PDF, and you avoid a document with a mix of upright and sideways pages.
+
+### What if the PDF already exists
+
+If the PDF already exists and something is the wrong way up, the options depend on how much of it is affected:
+
+- **Every page of one file is sideways.** Add that file to [Merge PDF](/merge-pdf/) together with at least one other file (the tool needs two), use the Rotate control on the sideways file, which turns all of its pages by 90 degrees, and merge.
+- **Only some pages are sideways.** This site cannot rotate single pages inside a PDF. If you still have the source images, fix them and rebuild with [JPG to PDF](/jpg-to-pdf/) or [Image to PDF](/image-to-pdf/). If you have only the PDF, use a PDF viewer or editor that offers page rotation, or ask whoever created the file for a corrected version.
+- **You fixed the page elsewhere.** You can bring the corrected file back into Merge PDF or Split PDF for assembly.
+
+## A short checklist
+
+- Name files with number prefixes and leading zeros.
+- Arrange the list in the tool, then double-check thumbnails.
+- Fix photo orientation first, in a photo viewer.
+- Build the PDF, then scroll the whole result.
+- Keep your originals until you have confirmed the output.
+
+## Next steps
+
+To assemble documents, try [Merge PDF](/merge-pdf/). To pull out or separate pages, use [Split PDF](/split-pdf/). If you are starting from photos, [JPG to PDF](/jpg-to-pdf/) lets you reorder and build in one pass, and [how to convert images to PDF](/blog/how-to-convert-images-to-pdf/) walks through the steps.
